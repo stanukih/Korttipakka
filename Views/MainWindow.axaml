@@ -1,0 +1,101 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Korttipakka.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Korttipakka.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Korttipakka">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <StackPanel>
+        <WrapPanel Margin="50">
+            <Canvas 
+                Height="300" 
+                Width="170" 
+                Background="Chocolate"
+                Margin="0 0 50 50"
+                IsVisible="{Binding pakkaIvVisible}"/>
+            <Canvas 
+                Height="300" 
+                Width="170" 
+                Background="MintCream"
+                Margin="0 0 50 50"
+                IsVisible="{Binding activeKorttiIvVisible}">
+                <RelativePanel Height="300" Width="170">
+                    <TextBlock 
+                        Background="LightCyan" 
+                        Width="40" 
+                        Height="40" 
+                        Margin="10"
+                        RelativePanel.AlignTopWithPanel="True"
+                        FontSize="30"
+                        TextAlignment="Center"
+                        Opacity="0.4"
+                        Text="{Binding activeKorttiMaa}"/>
+                        
+                    
+                    <TextBlock 
+                        Background="LightCyan" 
+                        Width="40" 
+                        Height="40" 
+                        Margin="10"
+                        RelativePanel.AlignBottomWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True"
+                        FontSize="30"
+                        TextAlignment="Center"
+                        Opacity="0.4"
+                        Text="{Binding activeKorttiMaa}"/>
+                    
+                    <TextBlock 
+                        Width="70" 
+                        Height="70" 
+                        Margin="10"
+                        RelativePanel.AlignHorizontalCenterWithPanel="True"
+                        RelativePanel.AlignVerticalCenterWithPanel="True"
+                        FontSize="70"
+                        TextAlignment="Center"
+                        Text="{Binding activeKorttiNumeroarvo}"/>
+                </RelativePanel>
+            </Canvas>
+            <Canvas 
+                Height="300" 
+                Width="170" 
+                Margin="0 0 50 50"
+                IsVisible="{Binding pakkaIvVisible}">
+                <ListBox 
+                    ItemsSource="{Binding kortitListText}"
+                    Height="300" 
+                    Width="170" 
+                    Margin="0 0 50 50"
+                    />
+                    
+            </Canvas>
+        </WrapPanel>
+        <WrapPanel>
+            <Button 
+                Command="{Binding initPakka}"
+                Content="Ota kortit"
+                Margin="20"
+                IsVisible="{Binding otaKorttiButtonIsVisible}"/>
+            <Button 
+                Command="{Binding sekoita}"
+                Content="Sekoita"
+                Margin="20"
+                IsVisible="{Binding pakkaIvVisible}"/>
+            <Button 
+                Command="{Binding laitaKortti}"
+                Content="Laita korti"
+                Margin="20"
+                IsVisible="{Binding pakkaIvVisible}"/>
+        </WrapPanel>
+        
+    </StackPanel>
+</Window>
